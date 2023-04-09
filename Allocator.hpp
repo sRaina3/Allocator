@@ -69,13 +69,12 @@ public:
           Input: Two const iterators
           Output: True if iterators at same point, False otherwise */
         friend bool operator == (const iterator& lhs, const iterator& rhs) {
-            // <your code>
             // Check addresses of iterator pointers
             if (&(*lhs) != &(*rhs)) {
                 return false;
             }
             return true;
-        }   // replace!
+        } 
 
         // -----------
         // operator !=
@@ -107,9 +106,8 @@ public:
 
         // Return value at iterator pointer
         int& operator * () const {
-            // <your code>
             return *_p;
-        }           // replace!
+        }           
 
         // -----------
         // operator ++
@@ -118,7 +116,6 @@ public:
         /* Moves over iterator to next block, returns moved over
            iterator */
         iterator& operator ++ () {
-            // <your code>
             int size = *(*this);
             assert(abs(size) >= 0);
             // Go to next block
@@ -143,7 +140,6 @@ public:
         /* Moves over iterator to previous block, returns moved over
            iterator */
         iterator& operator -- () {
-            // <your code>
             // Go to end sentinel of previous block
             this->_p -= 1;
             int size = *(*this);
@@ -179,13 +175,12 @@ public:
           Input: Two const iterators
           Output: True if iterators at same point, False otherwise */
         friend bool operator == (const const_iterator& lhs, const const_iterator& rhs) {
-            // <your code>
             // Check addresses of iterator pointers
             if (&(*lhs) != &(*rhs)) {
                 return false;
             }
             return true;
-        }                                                       // replace!
+        }                
 
         // -----------
         // operator !=
@@ -217,9 +212,8 @@ public:
 
         // Return value at iterator pointer
         const int& operator * () const {
-            // <your code>
             return *_p;
-        }                 // replace!
+        }           
 
         // -----------
         // operator ++
@@ -228,7 +222,6 @@ public:
         /* Moves over iterator to next block, returns moved over
            iterator */
         const_iterator& operator ++ () {
-            // <your code>
             int size = *(*this);
             assert(abs(size) >= 0);
             // Go to next block
@@ -253,7 +246,6 @@ public:
         /* Moves over iterator to previous block, returns moved over
            iterator */
         const_iterator& operator -- () {
-            // <your code>
             // Go to end sentinel of previous block
             this->_p -= 1;
             int size = *(*this);
@@ -294,7 +286,6 @@ private:
      * Output: True if valid conditions satisfied, false otherwise
      */
     bool valid () const {
-        // <your code>
         // <use iterators>
         const_iterator c_iter = begin();
         const_iterator end_iter = end();
@@ -347,7 +338,6 @@ public:
      * throw a bad_alloc exception, if n is invalid
      */
     pointer allocate (size_type s) {
-        // <your code>
         assert(s > 0);
         iterator iter = begin();
         iterator iter_end = end();
@@ -394,9 +384,9 @@ public:
      * O(1) in time
      */
     void construct (pointer p, const_reference v) {
-        new (p) T(v);                               // this is correct and exempt
+        new (p) T(v);                         
         assert(valid());
-    }                           // from the prohibition of new
+    }                 
 
     // ----------
     // deallocate
@@ -412,7 +402,6 @@ public:
      * adjacent blocks if they are also free
      */
     void deallocate (pointer p, size_type) const {
-        // <your code>
         int* pc = (int *)p;
         // get current block size
         int size = -1 * *pc;
@@ -470,7 +459,7 @@ public:
      * O(1) in time
      */
     void destroy (pointer p) {
-        p->~T();               // this is correct
+        p->~T();            
         assert(valid());
     }
 
