@@ -1,13 +1,6 @@
-// -------------
-// Allocator.hpp
-// -------------
-
 #ifndef Allocator_hpp
 #define Allocator_hpp
 
-// --------
-// includes
-// --------
 
 #include <cassert>   // assert
 #include <cstddef>   // ptrdiff_t, size_t
@@ -15,33 +8,19 @@
 #include <stdexcept> // invalid_argument
 #include <iostream>  // cout
 
-// ---------
-// Allocator
-// ---------
 
 template <typename T, std::size_t N>
 class my_allocator {
-    // -----------
-    // operator ==
-    // -----------
-
     friend bool operator == (const my_allocator&, const my_allocator&) {
         return false;
-    }                                                   // this is correct
+    }                                            
 
-    // -----------
-    // operator !=
-    // -----------
 
     friend bool operator != (const my_allocator& lhs, const my_allocator& rhs) {
         return !(lhs == rhs);
     }
 
 public:
-    // --------
-    // typedefs
-    // --------
-
     using      value_type = T;
 
     using       size_type = std::size_t;
@@ -54,16 +33,8 @@ public:
     using const_reference = const value_type&;
 
 public:
-    // ---------------
-    // iterator
-    // over the blocks
-    // ---------------
 
     class iterator {
-        // -----------
-        // operator ==
-        // -----------
-
         /* Compares two iterators and determines if they point to same
           location
           Input: Two const iterators
@@ -76,43 +47,23 @@ public:
             return true;
         } 
 
-        // -----------
-        // operator !=
-        // -----------
-
         friend bool operator != (const iterator& lhs, const iterator& rhs) {
             return !(lhs == rhs);
         }
 
     private:
-        // ----
-        // data
-        // ----
-
         int* _p;
 
     public:
-        // -----------
-        // constructor
-        // -----------
-
         iterator (int* p) {
             _p = p;
         }
-
-        // ----------
-        // operator *
-        // ----------
-
         // Return value at iterator pointer
         int& operator * () const {
             return *_p;
         }           
 
-        // -----------
-        // operator ++
-        // -----------
-
+ 
         /* Moves over iterator to next block, returns moved over
            iterator */
         iterator& operator ++ () {
@@ -123,20 +74,13 @@ public:
             return *this;
         }
 
-        // -----------
-        // operator ++
-        // -----------
-
         iterator operator ++ (int) {
             iterator x = *this;
             ++*this;
             return x;
         }
 
-        // -----------
-        // operator --
-        // -----------
-
+ 
         /* Moves over iterator to previous block, returns moved over
            iterator */
         iterator& operator -- () {
@@ -149,10 +93,7 @@ public:
             return *this;
         }
 
-        // -----------
-        // operator --
-        // -----------
-
+ 
         iterator operator -- (int) {
             iterator x = *this;
             --*this;
@@ -160,11 +101,7 @@ public:
         }
     };
 
-    // ---------------
-    // const_iterator
-    // over the blocks
-    // ---------------
-
+ 
     class const_iterator {
         // -----------
         // operator ==
