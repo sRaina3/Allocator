@@ -1,20 +1,17 @@
 #ifndef Allocator_hpp
 #define Allocator_hpp
 
-
 #include <cassert>   // assert
 #include <cstddef>   // ptrdiff_t, size_t
 #include <new>       // bad_alloc, new
 #include <stdexcept> // invalid_argument
 #include <iostream>  // cout
 
-
 template <typename T, std::size_t N>
 class my_allocator {
     friend bool operator == (const my_allocator&, const my_allocator&) {
         return false;
     }                                            
-
 
     friend bool operator != (const my_allocator& lhs, const my_allocator& rhs) {
         return !(lhs == rhs);
@@ -33,7 +30,6 @@ public:
     using const_reference = const value_type&;
 
 public:
-
     class iterator {
         /* Compares two iterators and determines if they point to same
           location
@@ -62,7 +58,6 @@ public:
         int& operator * () const {
             return *_p;
         }           
-
  
         /* Moves over iterator to next block, returns moved over
            iterator */
@@ -80,7 +75,6 @@ public:
             return x;
         }
 
- 
         /* Moves over iterator to previous block, returns moved over
            iterator */
         iterator& operator -- () {
@@ -93,7 +87,6 @@ public:
             return *this;
         }
 
- 
         iterator operator -- (int) {
             iterator x = *this;
             --*this;
@@ -101,11 +94,7 @@ public:
         }
     };
 
- 
     class const_iterator {
-        // -----------
-        // operator ==
-        // -----------
 
         /* Compares two iterators and determines if they point to same
           location
@@ -119,42 +108,22 @@ public:
             return true;
         }                
 
-        // -----------
-        // operator !=
-        // -----------
-
         friend bool operator != (const const_iterator& lhs, const const_iterator& rhs) {
             return !(lhs == rhs);
         }
 
     private:
-        // ----
-        // data
-        // ----
-
         const int* _p;
 
     public:
-        // -----------
-        // constructor
-        // -----------
-
         const_iterator (const int* p) {
             _p = p;
         }
-
-        // ----------
-        // operator *
-        // ----------
 
         // Return value at iterator pointer
         const int& operator * () const {
             return *_p;
         }           
-
-        // -----------
-        // operator ++
-        // -----------
 
         /* Moves over iterator to next block, returns moved over
            iterator */
@@ -166,19 +135,11 @@ public:
             return *this;
         }
 
-        // -----------
-        // operator ++
-        // -----------
-
         const_iterator operator ++ (int) {
             const_iterator x = *this;
             ++*this;
             return x;
         }
-
-        // -----------
-        // operator --
-        // -----------
 
         /* Moves over iterator to previous block, returns moved over
            iterator */
@@ -192,10 +153,6 @@ public:
             return *this;
         }
 
-        // -----------
-        // operator --
-        // -----------
-
         const_iterator operator -- (int) {
             const_iterator x = *this;
             --*this;
@@ -204,16 +161,7 @@ public:
     };
 
 private:
-    // ----
-    // data
-    // ----
-
     char a[N];
-
-    // -----
-    // valid
-    // -----
-
     /**
      * O(1) in space
      * O(n) in time
@@ -223,7 +171,6 @@ private:
      * Output: True if valid conditions satisfied, false otherwise
      */
     bool valid () const {
-        // <use iterators>
         const_iterator c_iter = begin();
         const_iterator end_iter = end();
         while (c_iter != end_iter) {
