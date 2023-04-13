@@ -190,10 +190,6 @@ private:
     }
 
 public:
-    // -----------
-    // constructor
-    // -----------
-
     /**
      * O(1) in space
      * O(1) in time
@@ -208,10 +204,6 @@ public:
     my_allocator             (const my_allocator&) = default;
     ~my_allocator            ()                    = default;
     my_allocator& operator = (const my_allocator&) = default;
-
-    // --------
-    // allocate
-    // --------
 
     /**
      * O(1) in space
@@ -259,10 +251,6 @@ public:
         return (T*)(&(*iter));
     }
 
-    // ---------
-    // construct
-    // ---------
-
     /**
      * O(1) in space
      * O(1) in time
@@ -271,10 +259,6 @@ public:
         new (p) T(v);                         
         assert(valid());
     }                 
-
-    // ----------
-    // deallocate
-    // ----------
 
     /**
      * O(1) in space
@@ -334,10 +318,6 @@ public:
         assert(valid());
     }
 
-    // -------
-    // destroy
-    // -------
-
     /**
      * O(1) in space
      * O(1) in time
@@ -346,10 +326,6 @@ public:
         p->~T();            
         assert(valid());
     }
-
-    // -----------
-    // operator []
-    // -----------
 
     /**
      * O(1) in space
@@ -367,10 +343,6 @@ public:
         return *reinterpret_cast<const int*>(&a[i]);
     }
 
-    // -----
-    // begin
-    // -----
-
     /**
      * O(1) in space
      * O(1) in time
@@ -386,10 +358,6 @@ public:
     const_iterator begin () const {
         return const_iterator(&(*this)[0]);
     }
-
-    // ---
-    // end
-    // ---
 
     /**
      * O(1) in space
