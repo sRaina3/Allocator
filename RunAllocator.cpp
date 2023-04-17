@@ -14,15 +14,7 @@
 
 using namespace std;
 
-// ----
-// main
-// ----
-
-
 int main () {
-    /*
-    the acceptance tests are hardwired to use my_allocator<double, 1000>
-    */
     using allocator_type = my_allocator<double, 1000>;
     using value_type     = typename allocator_type::value_type;
     using size_type      = typename allocator_type::size_type;
