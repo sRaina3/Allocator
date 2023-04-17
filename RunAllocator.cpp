@@ -1,11 +1,3 @@
-// ----------------
-// RunAllocator.cpp
-// ----------------
-
-// --------
-// includes
-// --------
-
 #include <iostream>         // cin, cout
 
 #include <cassert>          // assert
