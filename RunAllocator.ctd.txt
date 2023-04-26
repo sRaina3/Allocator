@@ -1,0 +1,9 @@
+INT(1, 30, cases)
+NEWLINE
+REP(cases)
+    NEWLINE
+    WHILE(!(MATCH("\n") || ISEOF))
+        INT(-124,124)
+        NEWLINE
+    END
+END
