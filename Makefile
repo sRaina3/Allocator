@@ -6,35 +6,6 @@ CPPCHECK      := cppcheck
 DOXYGEN       := doxygen
 SHELL         := bash
 
-ifeq ($(shell uname -s), Darwin)
-    BOOST    := /usr/local/include/boost
-    CXX      := clang++
-    CXXFLAGS := --coverage -g -std=c++20 -I$(INCLUDE_PATH) -Wall -Wextra -Wpedantic
-    GCOV     := llvm-cov gcov
-    GTEST    := /usr/local/include/gtest
-    LDFLAGS  := -lgtest -lgtest_main
-    LIB      := $(LIBRARY_PATH)
-    VALGRIND := valgrind-3.17
-else ifeq ($(shell uname -p), unknown)
-    BOOST    := /usr/include/boost
-    CXX      := g++
-    CXXFLAGS := --coverage -g -std=c++20 -Wall -Wextra -Wpedantic
-    GCOV     := gcov
-    GTEST    := /usr/include/gtest
-    LDFLAGS  := -lgtest -lgtest_main -pthread
-    LIB      := /usr/lib
-    VALGRIND := valgrind
-else
-    BOOST    := /usr/local/opt/boost-1.67/include/boost
-    CXX      := g++-11
-    CXXFLAGS := --coverage -g -std=c++20 -Wall -Wextra -Wpedantic
-    GCOV     := gcov-11
-    GTEST    := /usr/local/include/gtest
-    LDFLAGS  := -L/usr/local/opt/boost-1.77/lib/ -lgtest -lgtest_main -pthread
-    LIB      := /usr/local/lib
-    VALGRIND := valgrind-3.17
-endif
-
 # run docker
 docker:
 	docker run --rm -it -v $(PWD):/usr/gcc -w /usr/gcc gpdowning/gcc
@@ -101,11 +72,7 @@ all: $(FILES)
 # execute test harness with coverage
 test: TestAllocator
 	$(VALGRIND) ./TestAllocator
-ifeq ($(shell uname -s), Darwin)
 	$(GCOV) TestAllocator.cpp | grep -B 2 "hpp.gcov"
-else
-	$(GCOV) TestAllocator.cpp | grep -B 2 "hpp.gcov"
-endif
 
 # clone the Allocator test repo
 ../cs371p-allocator-tests:

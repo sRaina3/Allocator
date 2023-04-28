@@ -2,7 +2,7 @@
 #include <cstddef>   // ptrdiff_t
 #include <string>    // string
 
-#include <gtest/gtest.h> // gtest
+#include "gtest/gtest.h" // gtest
 
 #include "Allocator.hpp"
 
